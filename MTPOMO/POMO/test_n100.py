@@ -61,8 +61,9 @@ tester_params = {
     'aug_batch_size': 500,
     'test_data_load': {
         'enable': False,
-        'filename': '../../Test_instances/data_'+env_params['problem_type']+'_'+str(env_params['pomo_size'])\
-            +'_'+str(5000)+'.pt'
+        # 'filename': '../../Test_instances/data_'+env_params['problem_type']+'_'+str(env_params['pomo_size'])\
+        #     +'_'+str(5000)+'.pt'
+        'filename': 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt'
     },
 }
 if tester_params['augmentation_enable']:
