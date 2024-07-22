@@ -93,7 +93,8 @@ def main():
 
     copy_all_src(tester.result_folder)
 
-    tester.run()
+    # tester.run()
+    tester._test_one_batch(1)
 
 
 def _set_debug_mode():
