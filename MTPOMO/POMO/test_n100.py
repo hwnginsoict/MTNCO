@@ -63,7 +63,7 @@ tester_params = {
         'enable': False,
         # 'filename': '../../Test_instances/data_'+env_params['problem_type']+'_'+str(env_params['pomo_size'])\
         #     +'_'+str(5000)+'.pt'
-        'filename': 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt'
+        'filename': '\MTNCO\Test_instances\data_VRPTW_C101.pt'
     },
 }
 if tester_params['augmentation_enable']:
