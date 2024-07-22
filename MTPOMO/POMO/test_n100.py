@@ -95,6 +95,7 @@ def main():
     copy_all_src(tester.result_folder)
 
     tester.run()
+    tester._plot_CVRP()
 
 
 def _set_debug_mode():
