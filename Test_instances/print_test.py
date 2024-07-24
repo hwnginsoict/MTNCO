@@ -20,12 +20,12 @@ route_open = data['route_open']
 route_length_limit = data['route_length_limit']
 
 # Print the first batch to see a sample
-print("\nDepot XY:\n", depot_xy[0])
-print("\nNode XY:\n", node_xy[0])
-print("\nNode Demand:\n", node_demand[0])
-print("\nNode Early TW:\n", node_earlyTW[0])
-print("\nNode Late TW:\n", node_lateTW[0])
-print("\nNode Service Time:\n", node_serviceTime[0])
-print("\nRoute Open:\n", route_open[0])
-print("\nRoute Length Limit:\n", route_length_limit[0])
+print("\nDepot XY:\n", depot_xy)
+print("\nNode XY:\n", node_xy)
+print("\nNode Demand:\n", node_demand)
+print("\nNode Early TW:\n", node_earlyTW)
+print("\nNode Late TW:\n", node_lateTW)
+print("\nNode Service Time:\n", node_serviceTime)
+print("\nRoute Open:\n", route_open)
+print("\nRoute Length Limit:\n", route_length_limit)
 
