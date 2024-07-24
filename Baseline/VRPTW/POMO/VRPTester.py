@@ -70,6 +70,9 @@ class VRPTester:
 
             score, aug_score = self._test_one_batch(batch_size)
 
+            print("SCORE IS:", score)
+            print("AUG SCORE IS:", aug_score)
+
             score_AM.update(score, batch_size)
             aug_score_AM.update(aug_score, batch_size)
 
@@ -116,12 +119,12 @@ class VRPTester:
 
         # Output Result
         ###############################################                    
-        print(state.current_node[0])
-        indexList, coordinateList = self.env.get_node_seq()
-        nodesID = torch.Tensor.cpu(indexList[0][0]).numpy()[:,0]
-        nodesCoordinate = torch.Tensor.cpu(coordinateList[0][0]).numpy()      
-        depotCoordinate = torch.Tensor.cpu(self.env.depot_node_xy[0][0]).numpy()
-        demandList = torch.Tensor.cpu(self.env.depot_node_demand[0]).numpy()[nodesID]
+        #print(state.current_node[0])
+        # indexList, coordinateList = self.env.get_node_seq()
+        # nodesID = torch.Tensor.cpu(indexList[0][0]).numpy()[:,0]
+        # nodesCoordinate = torch.Tensor.cpu(coordinateList[0][0]).numpy()      
+        # depotCoordinate = torch.Tensor.cpu(self.env.depot_node_xy[0][0]).numpy()
+        # demandList = torch.Tensor.cpu(self.env.depot_node_demand[0]).numpy()[nodesID]
         # earlyTWList = torch.Tensor.cpu(self.env.depot_node_earlyTW[0]).numpy()[nodesID]
         # lateTWList = torch.Tensor.cpu(self.env.depot_node_lateTW[0]).numpy()[nodesID]
         # servicetimeList = torch.Tensor.cpu(self.env.depot_node_servicetime[0]).numpy()[nodesID]
@@ -131,20 +134,20 @@ class VRPTester:
         # #instanceName = "./CVRPInstances100/instance"+str(episode)
         # #self._plot_TSP(nodesCoordinate)
         # #input()
-        solution,cost = self._call_split(nodesCoordinate,depotCoordinate,demandList)
+        # solution,cost = self._call_split(nodesCoordinate,depotCoordinate,demandList)
         # #print(instanceName,' ',solution,' ',cost)
-        solution = []
+        # solution = []
         #print(nodesID)
         
-        for i in range (nodesID.size):
-            if nodesID[i] == 0:
-                solution.append(i+1)
-        print(solution)
+        # for i in range (nodesID.size):
+        #     if nodesID[i] == 0:
+        #         solution.append(i+1)
+        # print(solution)
         # self._plot_CVRP(nodesCoordinate,depotCoordinate,demandList,earlyTWList,lateTWList,servicetimeList,solution)
         # input()
-        self.splitCost += cost
+        # self.splitCost += cost
         #self._write_cvrplib(instanceName,nodesCoordinate,depotCoordinate,demandList)
-
+        # self._plot_CVRP(self,nodesCoordinate,depotCoordinate,demands,earlytw,latetw,servicetime,result)
         # Return
         ###############################################
         aug_reward = reward.reshape(aug_factor, batch_size, self.env.pomo_size)
