@@ -21,19 +21,22 @@ def load_c101_file(file_path):
     for line in data_lines:
         if line.strip():  # Skip empty lines
             parts = line.split()
-            depot_xy.append([float(parts[1]), float(parts[2])])
-            node_demand.append(float(parts[3]))
-            node_earlyTW.append(float(parts[4]))
-            node_lateTW.append(float(parts[5]))
-            node_serviceTime.append(float(parts[6]))
+            if len(depot_xy) == 0:  # First entry is the depot
+                depot_xy.append([float(parts[1]), float(parts[2])])
+            else:
+                node_xy.append([float(parts[1]), float(parts[2])])
+                node_demand.append(float(parts[3]))
+                node_earlyTW.append(float(parts[4]))
+                node_lateTW.append(float(parts[5]))
+                node_serviceTime.append(float(parts[6]))
 
     # Convert to tensors
-    depot_xy = torch.tensor(depot_xy[:1]).unsqueeze(0)  # Only the first line is depot
-    node_xy = torch.tensor(depot_xy[1:]).unsqueeze(0)   # The rest are nodes
-    node_demand = torch.tensor(node_demand).unsqueeze(0)
-    node_earlyTW = torch.tensor(node_earlyTW).unsqueeze(0)
-    node_lateTW = torch.tensor(node_lateTW).unsqueeze(0)
-    node_serviceTime = torch.tensor(node_serviceTime).unsqueeze(0)
+    depot_xy = torch.tensor(depot_xy).unsqueeze(0)  # Shape: (1, 1, 2)
+    node_xy = torch.tensor(node_xy).unsqueeze(0)    # Shape: (1, num_nodes, 2)
+    node_demand = torch.tensor(node_demand).unsqueeze(0)  # Shape: (1, num_nodes)
+    node_earlyTW = torch.tensor(node_earlyTW).unsqueeze(0)  # Shape: (1, num_nodes)
+    node_lateTW = torch.tensor(node_lateTW).unsqueeze(0)  # Shape: (1, num_nodes)
+    node_serviceTime = torch.tensor(node_serviceTime).unsqueeze(0)  # Shape: (1, num_nodes)
 
     # Create route_open and route_length_limit tensors
     route_open = torch.zeros_like(node_demand)
@@ -53,12 +56,12 @@ def load_c101_file(file_path):
     return data
 
 # Load C101 file and save as a .pt file
-c101_file_path = 'F:\CodingEnvironment\MTNCO\Test_instances\c101.txt'
+c101_file_path = 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\c101.txt'
 data = load_c101_file(c101_file_path)
-torch.save(data, 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
+torch.save(data, 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\data_VRPTW_C101.pt')
 
 # Load the saved data to verify
-loaded_data = torch.load('F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
+loaded_data = torch.load('F:\\CodingEnvironment\\MTNCO\\Test_instances\\data_VRPTW_C101.pt')
 
 for key, value in loaded_data.items():
     print(f"{key}: {value.shape}")
