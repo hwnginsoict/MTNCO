@@ -350,7 +350,7 @@ class VRPEnv:
 
         travel_distances = segment_lengths.sum(2)
         # shape: (batch, pomo)
-        print(travel_distances)
+        # print(travel_distances)
         return travel_distances
 
     def get_node_seq(self):
@@ -362,5 +362,7 @@ class VRPEnv:
 
         ordered_seq = all_xy.gather(dim=2, index=gathering_index)
         # shape: (batch, pomo, selected_list_length, 2)
+        print(gathering_index)
+        print(ordered_seq)
 
         return gathering_index,ordered_seq
