@@ -116,7 +116,7 @@ class VRPTester:
             selected, _ = self.model(state)
             # shape: (batch, pomo)
             state, reward, done = self.env.step(selected)
-            print(self.env._get_travel_distance)
+            madness = self.env._get_travel_distance()
 
         # Output Result
         ###############################################                    

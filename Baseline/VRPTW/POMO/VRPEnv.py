@@ -350,6 +350,7 @@ class VRPEnv:
 
         travel_distances = segment_lengths.sum(2)
         # shape: (batch, pomo)
+        print(travel_distances)
         return travel_distances
 
     def get_node_seq(self):
