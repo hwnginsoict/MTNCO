@@ -362,7 +362,7 @@ class VRPEnv:
 
         ordered_seq = all_xy.gather(dim=2, index=gathering_index)
         # shape: (batch, pomo, selected_list_length, 2)
-        print(gathering_index)
+        # print(gathering_index)
         # print(ordered_seq)
 
         return gathering_index,ordered_seq

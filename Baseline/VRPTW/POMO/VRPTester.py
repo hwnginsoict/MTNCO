@@ -162,8 +162,8 @@ class VRPTester:
         # shape: (batch,)
         aug_score = -max_aug_pomo_reward.float().mean()  # negative sign to make positive value
 
-        print("SCORE:", no_aug_score.item())
-        print("SCORE AUG:", aug_score.item())
+        # print("SCORE:", no_aug_score.item())
+        # print("SCORE AUG:", aug_score.item())
         return no_aug_score.item(), aug_score.item()
 
     def _plot_TSP(self,nodesCoordinate):
