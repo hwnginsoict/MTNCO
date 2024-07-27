@@ -116,6 +116,7 @@ class VRPTester:
             selected, _ = self.model(state)
             # shape: (batch, pomo)
             state, reward, done = self.env.step(selected)
+            # print(reward)
             madness = self.env.get_node_seq()
 
         # Output Result
