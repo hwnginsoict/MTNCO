@@ -1,6 +1,7 @@
 import torch
 
 # Load the data from the file
+# file_path = 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt'
 file_path = 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_100_5000.pt'
 data = torch.load(file_path)
 
