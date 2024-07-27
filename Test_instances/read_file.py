@@ -8,7 +8,7 @@ def load_c101_file(file_path):
     vehicle_info_index = lines.index("VEHICLE\n")
     customer_info_index = lines.index("CUSTOMER\n")
 
-    capacity = int(lines[vehicle_info_index + 2].split()[1])
+    capacity = int(lines[vehicle_info_index + 2].split()[1])/260
 
     data_lines = lines[customer_info_index + 3:]
     depot_xy = []
@@ -28,7 +28,7 @@ def load_c101_file(file_path):
             else: 
                 node_xy.append([float(parts[1])/100, float(parts[2])/100])
 
-            node_demand.append(float(parts[3]))
+            node_demand.append(float(parts[3])/260)
             node_earlyTW.append(float(parts[4])/300)
             node_lateTW.append(float(parts[5])/300)
             node_serviceTime.append(float(parts[6])/300)
