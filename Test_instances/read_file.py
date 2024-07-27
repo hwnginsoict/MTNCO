@@ -24,14 +24,14 @@ def load_c101_file(file_path):
         if line.strip():  # Skip empty lines
             parts = line.split()
             if len(depot_xy) == 0:
-                depot_xy.append([float(parts[1]), float(parts[2])])
+                depot_xy.append([float(parts[1])/100, float(parts[2])/100])
             else: 
-                node_xy.append([float(parts[1]), float(parts[2])])
+                node_xy.append([float(parts[1])/100, float(parts[2])/100])
 
             node_demand.append(float(parts[3]))
-            node_earlyTW.append(float(parts[4]))
-            node_lateTW.append(float(parts[5]))
-            node_serviceTime.append(float(parts[6]))
+            node_earlyTW.append(float(parts[4])/300)
+            node_lateTW.append(float(parts[5])/300)
+            node_serviceTime.append(float(parts[6])/300)
 
     # Convert to tensors
     depot_xy = torch.tensor(depot_xy).unsqueeze(0).clone().detach()  # Only the first line is depot
@@ -80,11 +80,11 @@ for key, value in loaded_data.items():
     print(f"{key}: {value.shape}")
 
 # Print the first batch to see a sample
-print("\nDepot XY:\n", loaded_data['depot_xy'])
-print("\nNode XY:\n", loaded_data['node_xy'])
-print("\nNode Demand:\n", loaded_data['node_demand'])
-print("\nNode Early TW:\n", loaded_data['node_earlyTW'])
-print("\nNode Late TW:\n", loaded_data['node_lateTW'])
-print("\nNode Service Time:\n", loaded_data['node_serviceTime'])
-print("\nRoute Open:\n", loaded_data['route_open'])
-print("\nRoute Length Limit:\n", loaded_data['route_length_limit'])
+print("\nDepot XY:\n", loaded_data['depot_xy'][0])
+print("\nNode XY:\n", loaded_data['node_xy'][0])
+print("\nNode Demand:\n", loaded_data['node_demand'][0])
+print("\nNode Early TW:\n", loaded_data['node_earlyTW'][0])
+print("\nNode Late TW:\n", loaded_data['node_lateTW'][0])
+print("\nNode Service Time:\n", loaded_data['node_serviceTime'][0])
+print("\nRoute Open:\n", loaded_data['route_open'][0])
+print("\nRoute Length Limit:\n", loaded_data['route_length_limit'][0])
