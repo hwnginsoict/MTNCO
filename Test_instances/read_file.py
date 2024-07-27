@@ -29,9 +29,9 @@ def load_c101_file(file_path):
                 node_xy.append([float(parts[1])/100, float(parts[2])/100])
 
             node_demand.append(float(parts[3])/260)
-            node_earlyTW.append(float(parts[4])/300)
-            node_lateTW.append(float(parts[5])/300)
-            node_serviceTime.append(float(parts[6])/300)
+            node_earlyTW.append(float(parts[4])/100)
+            node_lateTW.append(float(parts[5])/100)
+            node_serviceTime.append(float(parts[6])/100)
 
     # Convert to tensors
     depot_xy = torch.tensor(depot_xy).unsqueeze(0).clone().detach()  # Only the first line is depot
