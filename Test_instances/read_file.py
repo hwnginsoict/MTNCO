@@ -1,6 +1,6 @@
 import torch
 
-def load_c101_file(file_path):
+def load_file(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
@@ -8,7 +8,7 @@ def load_c101_file(file_path):
     vehicle_info_index = lines.index("VEHICLE\n")
     customer_info_index = lines.index("CUSTOMER\n")
 
-    capacity = int(lines[vehicle_info_index + 2].split()[1])/260
+    capacity = int(lines[vehicle_info_index + 2].split()[1])
 
     data_lines = lines[customer_info_index + 3:]
     depot_xy = []
@@ -28,7 +28,7 @@ def load_c101_file(file_path):
             else: 
                 node_xy.append([float(parts[1])/100, float(parts[2])/100])
 
-            node_demand.append(float(parts[3])/260)
+            node_demand.append(float(parts[3])/capacity)
             node_earlyTW.append(float(parts[4])/100)
             node_lateTW.append(float(parts[5])/100)
             node_serviceTime.append(float(parts[6])/100)
@@ -69,22 +69,35 @@ def load_c101_file(file_path):
     return data
 
 # Load C101 file and save as a .pt file
-c101_file_path = 'F:\CodingEnvironment\MTNCO\Baseline\VRPTW\POMO\C100\c101.txt'
-data = load_c101_file(c101_file_path)
+name_file = ['c101','c102','c103','c104','c105','c106','c107','c108','c109',
+             'c201','c202','c203','c204','c205','c206','c207','c208',
+             'r101','r102','r103','r104','r105','r106','r107','r108','r109','r110','r111','r112',
+             'r201','r202','r203','r204','r205','r206','r207','r208','r209','r210','r211',
+             'rc101','rc102','rc103','rc104','rc105','rc106','rc107','rc108',
+             'rc201','rc202','rc203','rc204','rc205','rc206','rc207','rc208']
+
+file_path = 'F:\CodingEnvironment\MTNCO\Baseline\VRPTW\POMO\C100\\'
+
+for name in name_file:
+    data = load_file(str(file_path + name + '.txt'))
+    torch.save(data, 'F:\CodingEnvironment\MTNCO\Test_instances\Solomon100\data_VRPTW_' + name + '.pt')
+
+data = load_file(file_path)
 torch.save(data, 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
 
 # Load the saved data to verify
-loaded_data = torch.load('F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
 
-for key, value in loaded_data.items():
-    print(f"{key}: {value.shape}")
+# loaded_data = torch.load('F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
 
-# Print the first batch to see a sample
-print("\nDepot XY:\n", loaded_data['depot_xy'][0])
-print("\nNode XY:\n", loaded_data['node_xy'][0])
-print("\nNode Demand:\n", loaded_data['node_demand'][0])
-print("\nNode Early TW:\n", loaded_data['node_earlyTW'][0])
-print("\nNode Late TW:\n", loaded_data['node_lateTW'][0])
-print("\nNode Service Time:\n", loaded_data['node_serviceTime'][0])
-print("\nRoute Open:\n", loaded_data['route_open'][0])
-print("\nRoute Length Limit:\n", loaded_data['route_length_limit'][0])
+# for key, value in loaded_data.items():
+#     print(f"{key}: {value.shape}")
+
+# # Print the first batch to see a sample
+# print("\nDepot XY:\n", loaded_data['depot_xy'][0])
+# print("\nNode XY:\n", loaded_data['node_xy'][0])
+# print("\nNode Demand:\n", loaded_data['node_demand'][0])
+# print("\nNode Early TW:\n", loaded_data['node_earlyTW'][0])
+# print("\nNode Late TW:\n", loaded_data['node_lateTW'][0])
+# print("\nNode Service Time:\n", loaded_data['node_serviceTime'][0])
+# print("\nRoute Open:\n", loaded_data['route_open'][0])
+# print("\nRoute Length Limit:\n", loaded_data['route_length_limit'][0])

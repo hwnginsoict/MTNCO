@@ -61,7 +61,7 @@ tester_params = {
     'aug_batch_size': 8,
     'test_data_load': {
         'enable': True,
-        'filename': '../../../Test_instances/data_VRPTW_C101.pt'
+        'filename': '../../../Test_instances/Solomon100/data_VRPTW_c101.pt' 
     },
 }
 if tester_params['augmentation_enable']:
