@@ -52,7 +52,7 @@ tester_params = {
         'path': '../../Trained_models/100',  # directory path of pre-trained model and log files saved.
         'epoch': 10000,  # epoch version of pre-trained model to load.
     },
-    'test_episodes': 5000,
+    'test_episodes': 1000,
     'test_batch_size': 500,
     'augmentation_enable': True,
     'aug_factor': 8,
