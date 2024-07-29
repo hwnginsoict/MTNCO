@@ -46,6 +46,14 @@ model_params = {
     'eval_type': 'argmax',
 }
 
+list = ['c101','c102','c103','c104','c105','c106','c107','c108','c109',
+             'c201','c202','c203','c204','c205','c206','c207','c208',
+             'r101','r102','r103','r104','r105','r106','r107','r108','r109','r110','r111','r112',
+             'r201','r202','r203','r204','r205','r206','r207','r208','r209','r210','r211',
+             'rc101','rc102','rc103','rc104','rc105','rc106','rc107','rc108',
+             'rc201','rc202','rc203','rc204','rc205','rc206','rc207','rc208']
+
+index = 0
 
 tester_params = {
     'use_cuda': USE_CUDA,
@@ -63,7 +71,7 @@ tester_params = {
         'enable': True,
         # 'filename': '../../Test_instances/data_'+env_params['problem_type']+'_'+str(env_params['pomo_size'])\
         #     +'_'+str(5000)+'.pt'
-        'filename': '\MTNCO\Test_instances\Solomon100\data_VRPTW_C101.pt'
+        'filename': '\MTNCO\Test_instances\Solomon100\data_VRPTW_' + list[index] + '.pt'
     },
 }
 if tester_params['augmentation_enable']:
@@ -94,8 +102,16 @@ def main():
 
     copy_all_src(tester.result_folder)
 
-    tester.run()
-    tester._plot_CVRP()
+    list_all = []
+
+    for i in range(len(list)):
+
+        result = tester.run()
+        list_all.append(result)
+        index += 1
+
+    print("All result:", list_all)
+    # tester._plot_CVRP()
 
 
 def _set_debug_mode():

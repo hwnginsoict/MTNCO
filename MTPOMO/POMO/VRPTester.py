@@ -88,6 +88,8 @@ class VRPTester:
                 self.logger.info(" *** Test Done *** ")
                 self.logger.info(" NO-AUG SCORE: {:.4f} ".format(score_AM.avg))
                 self.logger.info(" AUGMENTATION SCORE: {:.4f} ".format(aug_score_AM.avg))
+        
+        return aug_score_AM.avg
 
     def _test_one_batch(self, batch_size):
 
