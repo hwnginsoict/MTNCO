@@ -55,6 +55,8 @@ list = [
     'rc201', 'rc202', 'rc203', 'rc204', 'rc205', 'rc206', 'rc207', 'rc208'
 ]
 
+list = ['gen0', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9']
+
 index = 0
 
 
@@ -92,6 +94,7 @@ logger_params = {
 # main
 
 def main():
+    global index
     if DEBUG_MODE:
         _set_debug_mode()
 

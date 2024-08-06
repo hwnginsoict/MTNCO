@@ -1,4 +1,5 @@
 import torch
+import os
 
 def load_file(file_path):
     with open(file_path, 'r') as file:
@@ -76,14 +77,15 @@ name_file = ['c101','c102','c103','c104','c105','c106','c107','c108','c109',
              'rc101','rc102','rc103','rc104','rc105','rc106','rc107','rc108',
              'rc201','rc202','rc203','rc204','rc205','rc206','rc207','rc208']
 
-file_path = 'F:\CodingEnvironment\MTNCO\Baseline\VRPTW\POMO\C100\\'
+output_dir = 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\test100'
+os.makedirs(output_dir, exist_ok=True)
 
-for name in name_file:
-    data = load_file(str(file_path + name + '.txt'))
-    torch.save(data, 'F:\CodingEnvironment\MTNCO\Test_instances\Solomon100\data_VRPTW_' + name + '.pt')
+file_path = 'F:\\CodingEnvironment\\MTNCO\Baseline\\VRPTW\POMO\\test100\\'
 
-data = load_file(file_path)
-torch.save(data, 'F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
+for i in range(10):
+    data = load_file(str(file_path + 'gen' + str(i) + '.txt'))
+    torch.save(data, 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\test100\\data_VRPTW_' + 'gen' + str(i) + '.pt')
+
 
 # Load the saved data to verify
 
