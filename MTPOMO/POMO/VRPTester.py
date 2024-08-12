@@ -154,20 +154,27 @@ class VRPTester:
         aug_reward = reward.reshape(aug_factor, batch_size, self.env.pomo_size)
         # shape: (augmentation, batch, pomo)
 
-        max_pomo_reward, _ = aug_reward.max(dim=2)  # get best results from pomo
+        max_pomo_reward, index1 = aug_reward.max(dim=2)  # get best results from pomo
         # shape: (augmentation, batch)
+
+        print(index1)
+
 
         no_aug_score = -max_pomo_reward[0, :].float().mean()  # negative sign to make positive value
 
-        max_aug_pomo_reward, _ = max_pomo_reward.max(dim=0)  # get best results from augmentation
+        max_aug_pomo_reward, index2 = max_pomo_reward.max(dim=0)  # get best results from augmentation
         # shape: (batch,)
+        print(index2)
+
         aug_score = -max_aug_pomo_reward.float().mean()  # negative sign to make positive value
 
         #take index
-        no_aug_route = aug_reward[0][0]
-        index = torch.argmax(no_aug_route)
-        route = route[0][0][index]
-        print(route)
+        # no_aug_route = aug_reward[index1][index2]
+        # index = torch.argmax(no_aug_route)
+        # print(index)
+        # k = route[index1][index]
+        # print(route[0])
+        # print("K HERE:" , k)
 
         return no_aug_score.item(), aug_score.item(), route
 
