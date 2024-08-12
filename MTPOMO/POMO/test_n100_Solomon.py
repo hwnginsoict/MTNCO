@@ -97,7 +97,7 @@ def main():
         list_all.append(result)
         index += 1
 
-        print(route[:, :, :, None].expand(-1, -1, -1, 2))
+        # print(route[0][0])
 
     print("All results:", list_all)
 
