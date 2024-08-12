@@ -155,16 +155,16 @@ class VRPTester:
         # shape: (augmentation, batch, pomo)
 
         max_pomo_reward, index1 = aug_reward.max(dim=2)  # get best results from pomo
-        print(index1)
+        # print(index1)
 
 
         no_aug_score = -max_pomo_reward[0, :].float().mean()  # negative sign to make positive value
 
-        print(no_aug_score)
+        # print(no_aug_score)
 
         max_aug_pomo_reward, index2 = max_pomo_reward.max(dim=0)  # get best results from augmentation
 
-        print(index2)
+        # print(index2)
 
         # print(route[index1][index2])
 
@@ -174,9 +174,9 @@ class VRPTester:
         no_aug_route = max_pomo_reward
         index = torch.argmax(no_aug_route)
         # print(index)
-        print(route[0][int(index1[0][0])])
+        print(route[0][index])
 
-        return no_aug_score.item(), aug_score.item(), route
+        return no_aug_score.item(), aug_score.item(), route[0][index]
 
     def _plot_TSP(self,nodesCoordinate):
         

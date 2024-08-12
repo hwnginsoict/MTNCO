@@ -44,6 +44,9 @@ list = [
 ]
 
 
+list = ['c101', 'c102', 'c103', 'c104', 'c105', 'c106', 'c107', 'c108', 'c109',
+    'c201', 'c202', 'c203', 'c204', 'c205', 'c206', 'c207', 'c208']
+
 list = ['c101']
 
 # list = ['gen0', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9']
@@ -91,15 +94,20 @@ def main():
 
     list_all = []
 
+    route_all = []
+
     for i in range(len(list)):
         tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/Solomon100/data_VRPTW_{list[index]}.pt'
         result, route = tester.run()
         list_all.append(result)
+        route_all.append(route)
         index += 1
 
         # print(route[0][0])
 
     print("All results:", list_all)
+
+    print("All routes:", route_all)
 
 def _set_debug_mode():
     global tester_params
