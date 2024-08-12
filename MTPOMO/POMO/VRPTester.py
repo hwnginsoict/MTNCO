@@ -157,6 +157,7 @@ class VRPTester:
         max_pomo_reward, index1 = aug_reward.max(dim=2)  # get best results from pomo
         # shape: (augmentation, batch)
 
+        index1 = int(index1[0][7])
         print(index1)
 
 
@@ -164,7 +165,11 @@ class VRPTester:
 
         max_aug_pomo_reward, index2 = max_pomo_reward.max(dim=0)  # get best results from augmentation
         # shape: (batch,)
+
+        index2 = int(index2[7])
         print(index2)
+
+        print(route[index1][index2])
 
         aug_score = -max_aug_pomo_reward.float().mean()  # negative sign to make positive value
 
