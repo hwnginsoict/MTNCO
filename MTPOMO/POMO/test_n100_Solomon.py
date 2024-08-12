@@ -93,9 +93,11 @@ def main():
 
     for i in range(len(list)):
         tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/test100/data_VRPTW_{list[index]}.pt'
-        result = tester.run()
+        result, route = tester.run()
         list_all.append(result)
         index += 1
+
+        print(route)
 
     print("All results:", list_all)
 

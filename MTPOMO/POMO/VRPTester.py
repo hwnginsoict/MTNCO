@@ -68,7 +68,7 @@ class VRPTester:
             remaining = test_num_episode - episode
             batch_size = min(self.tester_params['test_batch_size'], remaining)
 
-            score, aug_score = self._test_one_batch(batch_size)
+            score, aug_score, route = self._test_one_batch(batch_size)
 
             score_AM.update(score, batch_size)
             aug_score_AM.update(aug_score, batch_size)
@@ -89,7 +89,7 @@ class VRPTester:
                 self.logger.info(" NO-AUG SCORE: {:.4f} ".format(score_AM.avg))
                 self.logger.info(" AUGMENTATION SCORE: {:.4f} ".format(aug_score_AM.avg))
         
-        return aug_score_AM.avg
+        return aug_score_AM.avg, route
 
     def _test_one_batch(self, batch_size):
 
@@ -114,7 +114,9 @@ class VRPTester:
         while not done:
             selected, _ = self.model(state)
             # shape: (batch, pomo)
-            state, reward, done = self.env.step(selected)
+            state, reward, done, route = self.env.step(selected)
+
+        
 
         # # Output Result
         # ###############################################                    
@@ -160,7 +162,7 @@ class VRPTester:
         # shape: (batch,)
         aug_score = -max_aug_pomo_reward.float().mean()  # negative sign to make positive value
 
-        return no_aug_score.item(), aug_score.item()
+        return no_aug_score.item(), aug_score.item(), route
 
     def _plot_TSP(self,nodesCoordinate):
         
