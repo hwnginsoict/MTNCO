@@ -173,8 +173,8 @@ class VRPTester:
         #take index
         no_aug_route = max_pomo_reward
         index = torch.argmax(no_aug_route)
-        print(index)
-        print(route[0][int(index)])
+        # print(index)
+        print(route[0][int(index1[0][0])])
 
         return no_aug_score.item(), aug_score.item(), route
 
