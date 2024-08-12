@@ -270,6 +270,8 @@ class VRPEnv:
         self.current_node = selected
         # shape: (batch, pomo)
         self.selected_node_list = torch.cat((self.selected_node_list, self.current_node[:, :, None]), dim=2)
+        
+        print("SELECTED NODE LIST: ", self.selected_node_list)
         # shape: (batch, pomo, 0~)
 
         # Dynamic-2
