@@ -92,7 +92,7 @@ def main():
     list_all = []
 
     for i in range(len(list)):
-        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/test100/data_VRPTW_{list[index]}.pt'
+        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/Solomon100/data_VRPTW_{list[index]}.pt'
         result, route = tester.run()
         list_all.append(result)
         index += 1
