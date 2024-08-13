@@ -117,7 +117,7 @@ class VRPTester:
         while not done:
             selected, _ = self.model(state)
             # shape: (batch, pomo)
-            state, reward, done = self.env.step(selected)
+            state, reward, done, route = self.env.step(selected)
             # print(reward)
             madness = self.env.get_node_seq()
 
@@ -157,17 +157,18 @@ class VRPTester:
         aug_reward = reward.reshape(aug_factor, batch_size, self.env.pomo_size)
         # shape: (augmentation, batch, pomo)
 
-        max_pomo_reward, _ = aug_reward.max(dim=2)  # get best results from pomo
+        max_pomo_reward, index1 = aug_reward.max(dim=2)  # get best results from pomo
         # shape: (augmentation, batch)
         no_aug_score = -max_pomo_reward[0, :].float().mean()  # negative sign to make positive value
 
-        max_aug_pomo_reward, _ = max_pomo_reward.max(dim=0)  # get best results from augmentation
+        max_aug_pomo_reward, index2 = max_pomo_reward.max(dim=0)  # get best results from augmentation
         # shape: (batch,)
         aug_score = -max_aug_pomo_reward.float().mean()  # negative sign to make positive value
 
         # print("SCORE:", no_aug_score.item())
         # print("SCORE AUG:", aug_score.item())
-        return no_aug_score.item(), aug_score.item()
+        print(route[0][index1[0][0]])
+        return no_aug_score.item(), aug_score.item(), route[0][index1[0][0]]
 
     def _plot_TSP(self,nodesCoordinate):
         

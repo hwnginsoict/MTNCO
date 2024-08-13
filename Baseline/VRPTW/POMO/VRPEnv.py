@@ -335,7 +335,7 @@ class VRPEnv:
         else:
             reward = None
 
-        return self.step_state, reward, done
+        return self.step_state, reward, done, self.selected_node_list
 
     def _get_travel_distance(self):
         gathering_index = self.selected_node_list[:, :, :, None].expand(-1, -1, -1, 2)

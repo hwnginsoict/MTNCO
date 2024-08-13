@@ -57,6 +57,10 @@ model_params = {
 
 list = ['gen0', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9']
 
+list = [
+    'c101', 'c102', 'c103', 'c104', 'c105', 'c106', 'c107', 'c108', 'c109']
+
+    # 'c201', 'c202', 'c203', 'c204', 'c205', 'c206', 'c207', 'c208']
 index = 0
 
 
@@ -109,13 +113,17 @@ def main():
 
     list_all = []
 
+    route_all = []
+
     for i in range(len(list)):
-        tester_params['test_data_load']['filename'] = f'../../Test_instances/test100/data_VRPTW_{list[index]}.pt'
-        result = tester.run()
+        tester_params['test_data_load']['filename'] = f'../../Test_instances/Solomon100/data_VRPTW_{list[index]}.pt'
+        result, route = tester.run()
         list_all.append(result)
+        route_all.append(route)
         index += 1
 
     print("All results:", list_all)
+    print("All routes:", route_all)
 
     # tester._test_one_batch(1)
 
