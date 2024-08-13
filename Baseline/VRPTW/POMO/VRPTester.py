@@ -68,7 +68,7 @@ class VRPTester:
             remaining = test_num_episode - episode
             batch_size = min(self.tester_params['test_batch_size'], remaining)
 
-            score, aug_score = self._test_one_batch(batch_size)
+            score, aug_score, route = self._test_one_batch(batch_size)
 
             print("SCORE IS:", score)
             print("AUG SCORE IS:", aug_score)
@@ -92,7 +92,7 @@ class VRPTester:
                 self.logger.info(" NO-AUG SCORE: {:.4f} ".format(score_AM.avg))
                 self.logger.info(" AUGMENTATION SCORE: {:.4f} ".format(aug_score_AM.avg))
         
-        return aug_score_AM.avg
+        return score_AM.avg, route
 
     def _test_one_batch(self, batch_size):
 
