@@ -60,10 +60,10 @@ tester_params = {
         'epoch': 10000,  # epoch version of pre-trained model to load.
     },
     'test_episodes': 1000,
-    'test_batch_size': 500,
+    'test_batch_size': 100,
     'augmentation_enable': True,
     'aug_factor': 8,
-    'aug_batch_size': 500,
+    'aug_batch_size': 100,
     'test_data_load': {
         'enable': True,
         'filename': ''  # Placeholder, will be set in main()
