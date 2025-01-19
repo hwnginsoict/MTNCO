@@ -1,0 +1,118 @@
+import torch
+import os
+
+def load_file(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    # Skip the header lines
+    vehicle_info_index = lines.index("VEHICLE\n")
+    customer_info_index = lines.index("CUSTOMER\n")
+
+    capacity = int(lines[vehicle_info_index + 2].split()[1])
+
+    data_lines = lines[customer_info_index + 3:]
+    depot_xy = []
+    node_xy = []
+    node_demand = []
+    node_earlyTW = []
+    node_lateTW = []
+    node_serviceTime = []
+    for line in data_lines:
+        print(line)
+
+    for line in data_lines:
+        if line.strip():  # Skip empty lines
+            parts = line.split()
+            if len(depot_xy) == 0:
+                depot_xy.append([float(parts[1])/100, float(parts[2])/100])
+            else: 
+                node_xy.append([float(parts[1])/100, float(parts[2])/100])
+
+            node_demand.append(float(parts[3])/capacity)
+            node_earlyTW.append(float(parts[4])/100)
+            node_lateTW.append(float(parts[5])/100)
+            node_serviceTime.append(float(parts[6])/100)
+
+    # Convert to tensors
+    depot_xy = torch.tensor(depot_xy).unsqueeze(0).clone().detach()  # Only the first line is depot
+    node_xy = torch.tensor(node_xy).unsqueeze(0).clone().detach()   # The rest are nodes
+    node_demand = torch.tensor(node_demand[1:]).unsqueeze(0).clone().detach()
+    node_earlyTW = torch.tensor(node_earlyTW[1:]).unsqueeze(0).clone().detach()
+    node_lateTW = torch.tensor(node_lateTW[1:]).unsqueeze(0).clone().detach()
+    node_serviceTime = torch.tensor(node_serviceTime[1:]).unsqueeze(0).clone().detach()
+
+    # Expand the tensors to match the desired size
+    batch_size = 5000
+    num_node = 200
+    depot_xy = depot_xy.expand(batch_size, 1, 2)
+    node_xy = node_xy.expand(batch_size, num_node, 2)
+    node_demand = node_demand.expand(batch_size, num_node)
+    node_earlyTW = node_earlyTW.expand(batch_size, num_node)
+    node_lateTW = node_lateTW.expand(batch_size, num_node)
+    node_serviceTime = node_serviceTime.expand(batch_size, num_node)
+
+    # Create route_open and route_length_limit tensors
+    route_open = torch.zeros_like(node_demand)
+    route_length_limit = torch.zeros(batch_size, node_demand.size(1) + 1)
+
+    data = {
+        'depot_xy': depot_xy,
+        'node_xy': node_xy,
+        'node_demand': node_demand,
+        'node_earlyTW': node_earlyTW,
+        'node_lateTW': node_lateTW,
+        'node_serviceTime': node_serviceTime,
+        'route_open': route_open,
+        'route_length_limit': route_length_limit
+    }
+
+    return data
+
+# Load C101 file and save as a .pt file
+# name_file = ['c101','c102','c103','c104','c105','c106','c107','c108','c109',
+#              'c201','c202','c203','c204','c205','c206','c207','c208',
+#              'r101','r102','r103','r104','r105','r106','r107','r108','r109','r110','r111','r112',
+#              'r201','r202','r203','r204','r205','r206','r207','r208','r209','r210','r211',
+#              'rc101','rc102','rc103','rc104','rc105','rc106','rc107','rc108',
+#              'rc201','rc202','rc203','rc204','rc205','rc206','rc207','rc208']
+
+name_file = []
+
+for type in ["C1", "C2", "R1", "R2", "RC1", "RC2"]:
+    for i in range(1, 11):
+        name_file.append(f"{type}_2_{i}")
+
+# print(name_file)
+# raise Exception("Stop here")
+
+output_dir = 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\test100'
+os.makedirs(output_dir, exist_ok=True)
+
+file_path = 'F:\\CodingEnvironment\\MTNCO\Baseline\\VRPTW\POMO\\C200\\'
+
+# for i in range(10):
+#     data = load_file(str(file_path + 'gen' + str(i) + '.txt'))
+#     torch.save(data, 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\test100\\data_VRPTW_' + 'gen' + str(i) + '.pt')
+
+
+for file in name_file:
+    data = load_file(str(file_path + file + '.TXT'))
+    torch.save(data, 'F:\\CodingEnvironment\\MTNCO\\Test_instances\\Solomon200\\data_VRPTW_' + file + '.pt')
+
+# Load the saved data to verify
+
+# loaded_data = torch.load('F:\CodingEnvironment\MTNCO\Test_instances\data_VRPTW_C101.pt')
+
+# for key, value in loaded_data.items():
+#     print(f"{key}: {value.shape}")
+
+# # Print the first batch to see a sample
+# print("\nDepot XY:\n", loaded_data['depot_xy'][0])
+# print("\nNode XY:\n", loaded_data['node_xy'][0])
+# print("\nNode Demand:\n", loaded_data['node_demand'][0])
+# print("\nNode Early TW:\n", loaded_data['node_earlyTW'][0])
+# print("\nNode Late TW:\n", loaded_data['node_lateTW'][0])
+# print("\nNode Service Time:\n", loaded_data['node_serviceTime'][0])
+# print("\nRoute Open:\n", loaded_data['route_open'][0])
+# print("\nRoute Length Limit:\n", loaded_data['route_length_limit'][0])
