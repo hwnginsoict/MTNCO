@@ -16,7 +16,7 @@ sys.path.insert(0, "../..")  # for utils
 from utils.utils import create_logger, copy_all_src
 from VRPTester import VRPTester as Tester
 
-size = 50
+size = 100
 
 # Parameters
 env_params = {
