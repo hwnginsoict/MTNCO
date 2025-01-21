@@ -79,8 +79,8 @@ def main():
     copy_all_src(tester.result_folder)
 
     list_all = []
-
     route_all = []
+    time_list = []
 
     for i in range(1,4):
         tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/mock_data/data_VRPTW_{size}_{i}.pt'
@@ -90,11 +90,16 @@ def main():
 
         # print(route[0][0])
 
+        run_time = time.time() - start
+        time_list.append(run_time)
+
     print("All results:", list_all)
-
     print("All routes:", route_all)
+    print("Time:", run_time)
 
-    print(time.time() - start)
+
+    print("Average results:", sum(list_all)/len(list_all))
+    print("Average time:", time_list/len(time_list))
 
 def _set_debug_mode():
     global tester_params
