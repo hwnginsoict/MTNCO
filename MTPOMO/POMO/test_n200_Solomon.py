@@ -99,7 +99,7 @@ def main():
 
 
     print("Average results:", sum(list_all)/len(list_all))
-    print("Average time:", time_list/len(time_list))
+    print("Average time:", sum(time_list)/len(time_list))
 
 def _set_debug_mode():
     global tester_params
