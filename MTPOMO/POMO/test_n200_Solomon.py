@@ -16,11 +16,13 @@ sys.path.insert(0, "../..")  # for utils
 from utils.utils import create_logger, copy_all_src
 from VRPTester import VRPTester as Tester
 
+size = 50
+
 # Parameters
 env_params = {
     'problem_type': "VRPTW", # test problem type
-    'problem_size': 20,
-    'pomo_size': 20,
+    'problem_size': size,
+    'pomo_size': size,
 }
 
 model_params = {
@@ -78,7 +80,7 @@ def main():
     route_all = []
 
     for i in range(1,4):
-        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/mock_data/data_VRPTW_20_{i}.pt'
+        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/mock_data/data_VRPTW_{size}_{i}.pt'
         result, route = tester.run()
         list_all.append(result)
         route_all.append(route)
