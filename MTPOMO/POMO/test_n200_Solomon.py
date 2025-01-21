@@ -72,6 +72,9 @@ def main():
     create_logger(**logger_params)
     _print_config()
 
+    import time
+    start = time.time()
+
     tester = Tester(env_params=env_params, model_params=model_params, tester_params=tester_params)
     copy_all_src(tester.result_folder)
 
@@ -90,6 +93,8 @@ def main():
     print("All results:", list_all)
 
     print("All routes:", route_all)
+
+    print(time.time() - start)
 
 def _set_debug_mode():
     global tester_params
