@@ -78,7 +78,7 @@ def main():
     route_all = []
 
     for i in range(1,4):
-        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/Solomon200/data_VRPTW_20_{i}.pt'
+        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/mock_data/data_VRPTW_20_{i}.pt'
         result, route = tester.run()
         list_all.append(result)
         route_all.append(route)
