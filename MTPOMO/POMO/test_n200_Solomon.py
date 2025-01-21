@@ -82,7 +82,6 @@ def main():
         result, route = tester.run()
         list_all.append(result)
         route_all.append(route)
-        index += 1
 
         # print(route[0][0])
 
