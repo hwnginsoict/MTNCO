@@ -19,8 +19,8 @@ from VRPTester import VRPTester as Tester
 # Parameters
 env_params = {
     'problem_type': "VRPTW", # test problem type
-    'problem_size': 200,
-    'pomo_size': 200,
+    'problem_size': 20,
+    'pomo_size': 20,
 }
 
 model_params = {
@@ -33,24 +33,6 @@ model_params = {
     'ff_hidden_dim': 512,
     'eval_type': 'argmax',
 }
-
-# list = [
-#     'c101', 'c102', 'c103', 'c104', 'c105', 'c106', 'c107', 'c108', 'c109',
-#     'c201', 'c202', 'c203', 'c204', 'c205', 'c206', 'c207', 'c208',
-#     'r101', 'r102', 'r103', 'r104', 'r105', 'r106', 'r107', 'r108', 'r109', 'r110', 'r111', 'r112',
-#     'r201', 'r202', 'r203', 'r204', 'r205', 'r206', 'r207', 'r208', 'r209', 'r210', 'r211',
-#     'rc101', 'rc102', 'rc103', 'rc104', 'rc105', 'rc106', 'rc107', 'rc108',
-#     'rc201', 'rc202', 'rc203', 'rc204', 'rc205', 'rc206', 'rc207', 'rc208'
-# ]
-
-# list = ['gen0', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9']
-
-list = []
-for type in ["C1", "C2", "R1", "R2", "RC1", "RC2"]:
-    for i in range(1, 11):
-        list.append(f"{type}_2_{i}")
-
-index = 0
 
 tester_params = {
     'use_cuda': USE_CUDA,
@@ -95,8 +77,8 @@ def main():
 
     route_all = []
 
-    for i in range(len(list)):
-        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/Solomon200/data_VRPTW_{list[index]}.pt'
+    for i in range(1,4):
+        tester_params['test_data_load']['filename'] = f'/content/MTNCO/Test_instances/Solomon200/data_VRPTW_20_{i}.pt'
         result, route = tester.run()
         list_all.append(result)
         route_all.append(route)
