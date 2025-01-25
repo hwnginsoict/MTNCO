@@ -40,14 +40,14 @@ tester_params = {
     'use_cuda': USE_CUDA,
     'cuda_device_num': CUDA_DEVICE_NUM,
     'model_load': {
-        'path': '../../Trained_models/100',  # directory path of pre-trained model and log files saved.
+        'path': '../../Trained_models/50',  # directory path of pre-trained model and log files saved.
         'epoch': 10000,  # epoch version of pre-trained model to load.
     },
-    'test_episodes': 1000,
-    'test_batch_size': 100,
+    'test_episodes': 5000,
+    'test_batch_size': 500,
     'augmentation_enable': True,
     'aug_factor': 8,
-    'aug_batch_size': 100,
+    'aug_batch_size': 500,
     'test_data_load': {
         'enable': True,
         'filename': ''  # Placeholder, will be set in main()
